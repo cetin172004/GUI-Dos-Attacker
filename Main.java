@@ -15,8 +15,8 @@ import javafx.scene.layout.VBox;
 // ComboBox modules
 import javafx.scene.control.ComboBox;
 
-import java.util.Arrays;
-import java.util.List;
+// Label modules
+import javafx.scene.control.Label;
 
 // ========================================================================================
 
@@ -26,23 +26,33 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         StackPane root = new StackPane();
         
-        // Wifi Monster - Image
+        // (VB) Wifi Monster - Image
         Image monster = new Image(getClass().getResourceAsStream("src/monster.jpeg"));
         ImageView image_view = new ImageView(monster);
         image_view.setFitWidth(300);
         image_view.setPreserveRatio(true);
         
-        // Wifi Adapter - ComboBox
-        String[] items = { "Seçenek 1", "Seçenek 2", "Seçenek 3" };
+        VBox image_box = new VBox(image_view);
         
-        ComboBox<String> select_wifi_adapter = new ComboBox<>();
-        select_wifi_adapter.getItems().addAll(items);
+        // (HB) Select Wifi Adapter - Label & Wifi Adapter - ComboBox 
+        Label select_wifi_adapter = new Label("Select wifi adapter: ");
+        
+        String[] items = { "ec1", "ec2", "ec3" };
+        ComboBox<String> wifi_adapter_cb = new ComboBox<>();
+        wifi_adapter_cb.getItems().addAll(items);
+        
+        HBox adapter_box = new HBox(5);
+        adapter_box.getChildren().addAll(select_wifi_adapter, wifi_adapter_cb);
         
         // Layout Arrangement
-        HBox main_box = new HBox(200);
-        main_box.getChildren().addAll(image_view, select_wifi_adapter);
-        main_box.setAlignment(javafx.geometry.Pos.CENTER);
+        HBox main_box = new HBox(150);
+        main_box.getChildren().addAll(image_box, adapter_box);
+         
+        adapter_box.setAlignment(javafx.geometry.Pos.CENTER);
+        image_box.setAlignment(javafx.geometry.Pos.CENTER);
         
+        main_box.setAlignment(javafx.geometry.Pos.CENTER);
+             
         // Root Properties
         root.getChildren().addAll(main_box);
         root.setStyle("-fx-background-color: #3d758e;");
