@@ -27,6 +27,9 @@ import javafx.scene.control.TextField;
 // Button modules
 import javafx.scene.control.Button;
 
+// IOException
+import java.io.IOException;
+
 // ========================================================================================
 
 public class Main extends Application {
@@ -105,6 +108,17 @@ public class Main extends Application {
         scan_button.setFont(font1);
         scan_button.setStyle("-fx-text-fill: #021526; -fx-background-color: white;");
         scan_button.setPrefWidth(300);
+        
+        scan_button.setOnAction(event -> {
+            try {
+				ProcessBuilder processBuilder = new ProcessBuilder("bash", "scan.sh");
+				Process process = processBuilder.start();
+				process.waitFor();
+			
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+			}
+        });
         
         HBox button_box = new HBox(10);
 		button_box.getChildren().addAll(start_button, scan_button);
