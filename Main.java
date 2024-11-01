@@ -131,9 +131,15 @@ public class Main extends Application {
 						is_first = true;
 						wifi_adapter_cb.setValue(line);
 					}
-					
-					
-					
+				
+				}
+			
+				wireless_network_cb.getItems().clear();
+				BufferedReader br2 = new BufferedReader(new FileReader("networks"));
+				String line2;
+				boolean is_first2 = false;
+				while ((line2 = br2.readLine()) != null) {
+					wireless_network_cb.getItems().addAll(line2);
 				}
 			
 			} catch (IOException | InterruptedException e) {
