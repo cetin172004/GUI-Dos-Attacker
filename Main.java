@@ -30,6 +30,10 @@ import javafx.scene.control.Button;
 // IOException
 import java.io.IOException;
 
+// File Reader
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 // ========================================================================================
 
 public class Main extends Application {
@@ -115,9 +119,27 @@ public class Main extends Application {
 				Process process = processBuilder.start();
 				process.waitFor();
 			
+				wifi_adapter_cb.getItems().clear();
+				BufferedReader br = new BufferedReader(new FileReader("interfaces"));
+				String line;
+				boolean is_first = false;
+				while ((line = br.readLine()) != null) {
+					if (is_first == true) {
+						wifi_adapter_cb.getItems().addAll(line);
+					} else {
+						wifi_adapter_cb.getItems().addAll(line);
+						is_first = true;
+						wifi_adapter_cb.setValue(line);
+					}
+					
+					
+					
+				}
+			
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
+    
         });
         
         HBox button_box = new HBox(10);

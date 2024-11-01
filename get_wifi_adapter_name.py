@@ -2,6 +2,8 @@ import subprocess
 
 wireless_interface_command = ["iw", "dev"]
 
+interfaces_file = open("interfaces", "w")
+
 def get_wifi_adapter_name():
 	result = subprocess.run(wireless_interface_command, capture_output=True, text=True)
 	lines = result.stdout.splitlines()
@@ -27,7 +29,10 @@ def get_wifi_adapter_name():
 				counter += 1
 		
 		adapter_names.append(adapter_name)
-	
+		
 	return adapter_names
 	
-print(get_wifi_adapter_name())
+for adapter_name in get_wifi_adapter_name():
+	#interfaces_file.write(adapter_name + "\n")
+	interfaces_file.write("test_driver \n");
+	interfaces_file.write("other_test_driver")
